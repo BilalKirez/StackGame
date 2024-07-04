@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public CharecterMovement character;
+    public CharacterMovement character;
     public PlatformManager platformManager;
     public Transform endPlatform;
     public Animator winAnimator;

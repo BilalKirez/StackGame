@@ -10,7 +10,7 @@ public class PlatformManager : MonoBehaviour
     public GameObject currentPlatform;
     public GameObject lastPlatform;
     public int comboCount = 0;
-    public CharecterMovement charecterMovement;
+    public CharacterMovement characterMovement;
 
     /// <summary>
     /// PlatformSettings
@@ -31,7 +31,7 @@ public class PlatformManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         GenerateNextPlatform();
-        charecterMovement.SetTargetPosition(lastPlatform.transform.position);
+        characterMovement.SetTargetPosition(lastPlatform.transform.position);
     }
     private void Update()
     {
@@ -80,7 +80,7 @@ public class PlatformManager : MonoBehaviour
         platform.GetComponent<MeshRenderer>().material = platformMaterials[platformIndex % platformMaterials.Count];
         platformIndex++;
         currentPlatform = platform;
-        charecterMovement.SetTargetPosition(lastPlatform.transform.position);
+        characterMovement.SetTargetPosition(lastPlatform.transform.position);
     }
 
     /// <summary>

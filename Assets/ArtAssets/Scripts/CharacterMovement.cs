@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharecterMovement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     private float moveSpeed = 2f;
     public bool isMoving = false;
