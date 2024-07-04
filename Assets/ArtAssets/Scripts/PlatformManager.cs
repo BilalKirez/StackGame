@@ -67,7 +67,7 @@ public class PlatformManager : MonoBehaviour
         if (comboClip != null)
         {
             audioSource.clip = comboClip;
-            audioSource.pitch = 0.4f + (comboCount * 0.2f);
+            audioSource.pitch = 0.3f + (comboCount * 0.1f);
             audioSource.Play();
         }
     }
