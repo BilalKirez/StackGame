@@ -113,11 +113,13 @@ public class PlatformManager : MonoBehaviour
     /// <returns></returns>
     public float CheckOverlap()
     {
-        float overlap = Mathf.Abs(currentPlatform.transform.position.x - lastPlatform.transform.position.x);
+        float overlap = currentPlatform.transform.position.x - lastPlatform.transform.position.x;
         float overlapAbs = Mathf.Abs(overlap);
         float currentPlatformWidth = currentPlatform.transform.localScale.x;
+        float lastPlatformWidth = lastPlatform.transform.localScale.x;
 
         float remainingWidth = currentPlatformWidth - overlapAbs;
+
         if (remainingWidth >= tolerance)
         {
             platformScale = remainingWidth;
@@ -125,8 +127,9 @@ public class PlatformManager : MonoBehaviour
             float cutPosition = (currentPlatform.transform.position.x + lastPlatform.transform.position.x) / 2;
             Vector3 newScale = new Vector3(remainingWidth, currentPlatform.transform.localScale.y, currentPlatform.transform.localScale.z);
             Vector3 newPosition = new Vector3(cutPosition, currentPlatform.transform.position.y, currentPlatform.transform.position.z);
-            Debug.Log("overlap: " + overlap);
-            GameObject fallingPart = Instantiate(currentPlatform, currentPlatform.transform.position + new Vector3(1 - overlap, 0, 0), currentPlatform.transform.rotation);
+
+            Vector3 fallingPartPosition = currentPlatform.transform.position + new Vector3((overlap > 0 ? 1 : -1) * (remainingWidth / 2 + overlapAbs / 2), 0, 0);
+            GameObject fallingPart = Instantiate(currentPlatform, fallingPartPosition, currentPlatform.transform.rotation);
             fallingPart.transform.localScale = new Vector3(overlapAbs, currentPlatform.transform.localScale.y, currentPlatform.transform.localScale.z);
             fallingPart.AddComponent<Rigidbody>();
 
@@ -139,6 +142,7 @@ public class PlatformManager : MonoBehaviour
         {
             platformScale = 0;
         }
+
         return overlapAbs;
     }
 }
