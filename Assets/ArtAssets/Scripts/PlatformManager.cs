@@ -4,26 +4,22 @@ using UnityEngine;
 
 public class PlatformManager : MonoBehaviour
 {
-    public int platformIndex;
-    public float platformScale = 3f;
-    public ObjectPool objectPool;
     public GameObject currentPlatform;
     public GameObject lastPlatform;
-    public int comboCount = 0;
     public CharacterMovement characterMovement;
+    public ObjectPool objectPool;
 
-    /// <summary>
-    /// PlatformSettings
-    /// </summary>
+    // PlatformSettings
     public float speed = 2f;
     public float moveDistance = 3f;
     private bool movingRight = true;
     public List<Material> platformMaterials = new List<Material>();
     public float tolerance;
+    public int platformIndex;
+    public float platformScale = 3f;
 
-    /// <summary>
-    /// Audio Settings
-    /// </summary>
+    // Audio Settings
+    public int comboCount = 0;
     public AudioSource audioSource;
     public AudioClip comboClip;
 
@@ -83,10 +79,6 @@ public class PlatformManager : MonoBehaviour
         characterMovement.SetTargetPosition(lastPlatform.transform.position);
     }
 
-    /// <summary>
-    /// Aktif olan platformun hareket fonksiyonu
-    /// </summary>
-    /// <param name="currentPlatformTransform"></param>
     public void Movement(Transform currentPlatformTransform)
     {
         if (movingRight)
@@ -107,10 +99,6 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Dýþarýya taþan kýsýmlarýn hesaplanýp kesilme iþlemini yapan fonksiyon
-    /// </summary>
-    /// <returns></returns>
     public float CheckOverlap()
     {
         float overlap = currentPlatform.transform.position.x - lastPlatform.transform.position.x;
