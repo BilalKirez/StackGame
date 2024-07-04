@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Transform endPlatform;
     public Animator winAnimator;
     public CameraController cameraController;
+    public bool win;
 
     void Update()
     {
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
         {
             LoseGame();
         }
-        if (!character.isMoving)
+        if (!character.isMoving && !win)
         {
             CheckWinCondition();
         }
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     [ContextMenu("WinGame")]
     private void WinGame()
     {
+        win = true;
         winAnimator.SetTrigger("Win");
         cameraController.RotateAroundCharacter(character.transform);
     }
