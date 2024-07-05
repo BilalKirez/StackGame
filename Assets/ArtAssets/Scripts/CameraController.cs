@@ -26,4 +26,9 @@ public class CameraController : MonoBehaviour
             yield return null;
         }
     }
+    public void SetCameraSettings()
+    {
+        StopAllCoroutines();
+        cinemachineCamera.enabled = true;
+    }
 }

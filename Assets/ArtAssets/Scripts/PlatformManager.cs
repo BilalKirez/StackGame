@@ -6,6 +6,7 @@ public class PlatformManager : MonoBehaviour
 {
     public GameObject currentPlatform;
     public GameObject lastPlatform;
+    public Transform endPlatform;
     public CharacterMovement characterMovement;
     public ObjectPool objectPool;
 
@@ -31,11 +32,11 @@ public class PlatformManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !IsFinalPlatform())
         {
             OnPlatformClick();
         }
-        if (currentPlatform != null && platformScale > 0)
+        if (currentPlatform != null && platformScale > 0 && !IsFinalPlatform())
         {
             Movement(currentPlatform.transform);
         }
@@ -65,6 +66,11 @@ public class PlatformManager : MonoBehaviour
             audioSource.clip = comboClip;
             audioSource.pitch = 0.3f + (comboCount * 0.1f);
             audioSource.Play();
+        }
+        if (comboCount == 10)
+        {
+            platformScale += 0.35f;
+            currentPlatform.transform.localScale = new Vector3(platformScale, 1, 3);
         }
     }
 
@@ -132,5 +138,17 @@ public class PlatformManager : MonoBehaviour
         }
 
         return overlapAbs;
+    }
+
+    private bool IsFinalPlatform()
+    {
+        return currentPlatform.transform.position.z > endPlatform.position.z;
+    }
+    public void SetNextLevelPlatforms()
+    {
+        endPlatform.position += new Vector3(0, 0, 45);
+        //platformScale = 3f;
+        //currentPlatform.transform.localScale = new Vector3(platformScale, 1, 3);
+        speed += 0.2f;
     }
 }
