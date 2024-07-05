@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         win = false;
         winAnimator.SetBool("Win", false);
         var charTransform = character.animator.gameObject.transform;
-        charTransform.position = new Vector3(0, 0, charTransform.position.z);
-        charTransform.rotation = Quaternion.identity;
+        charTransform.localPosition = Vector3.zero;
+        charTransform.localRotation = Quaternion.identity;
     }
 }
